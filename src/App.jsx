@@ -81,7 +81,8 @@ export default function App() {
     setIsCopied(false);
 
     try {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+      // Menggunakan versi model yang paling stabil dan terbaru
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
       
       const promptInstruction = `Anda adalah copywriter konten TikTok/Shopee Affiliate profesional. Tolong buatkan naskah/skrip Voice Over. INFORMASI: - Detail Tambahan: ${productText || 'Tolong analisis dari gambar terlampir untuk mengetahui apa produknya.'} - Gaya Bahasa: ${tone} - Perkiraan Durasi Teks: ${duration.words} kata. - Bahasa: Indonesia yang natural, gaul, dan relevan dengan tren saat ini. FORMAT YANG WAJIB DIIKUTI: [HOOK] (Tulis 1-2 kalimat pembuka yang sangat memancing rasa penasaran atau relate dengan masalah penonton di awal video) [ISI SKRIP] (Tulis isi skrip promosi yang mengalir natural, tanpa tanda baca aneh, karena teks ini akan dibaca oleh AI Voice Over di CapCut. Pastikan menyebutkan ajakan bertindak seperti 'cek keranjang kuning' di akhir)`;
 
@@ -108,7 +109,6 @@ export default function App() {
       const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text;
       
       if (generatedText) {
-        // Membersihkan karakter bintang (*)
         const cleanText = generatedText.split('*').join('');
         setScript(cleanText.trim());
       } else {
